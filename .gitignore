@@ -1,0 +1,21 @@
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Database files (ignored so local DB states are not checked in)
+*.db
+*.sqlite3
+
+# OS / IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
