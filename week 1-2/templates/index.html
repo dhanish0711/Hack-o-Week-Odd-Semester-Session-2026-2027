@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-logo">
+                <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                <div class="logo-text">
+                    <h1>Student Registry Portal</h1>
+                    <span>Student Database Directory</span>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="status-indicator">
+                    <span class="pulse-dot"></span> System Connected
+                </span>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- Search & Actions Bar -->
+            <div class="actions-bar-container">
+                <div class="search-bar-row">
+                    <form action="/" method="GET" class="search-form">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                            <input type="text" name="search" placeholder="Search by student name, roll number, course track, or semester..." value="{{ search_query or '' }}">
+                        </div>
+                        <button type="submit" class="btn btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                        </button>
+                        {% if search_query %}
+                            <a href="/" class="btn btn-clear-search" title="Clear Search">
+                                <i class="fa-solid fa-xmark"></i> Clear
+                            </a>
+                        {% endif %}
+                    </form>
+                    
+                    <div class="quick-actions">
+                        <form action="/generate" method="POST" style="display: inline-block;">
+                            <button type="submit" class="btn btn-api-fetch">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Fetch Mock Student (API)
+                            </button>
+                        </form>
+                        <form action="/clear" method="POST" style="display: inline-block; margin-left: 0.5rem;">
+                            <button type="submit" class="btn btn-danger-action" onclick="return confirm('Reset all student records from database?');">
+                                <i class="fa-solid fa-trash-can"></i> Reset Directory
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout: Table on Left, Manual Add Form on Right -->
+            <div class="directory-grid">
+                
+                <!-- Left: Student List -->
+                <div class="card directory-card">
+                    <div class="card-header">
+                        <h2>Registered Student Directory</h2>
+                        <p class="card-subtitle">Active student database records</p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Roll Number</th>
+                                    <th>Student Name</th>
+                                    <th>Contact Details</th>
+                                    <th>Academic Details</th>
+                                    <th>Admission Date</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if students %}
+                                    {% for student in students %}
+                                    <tr>
+                                        <td>
+                                            <code class="record-id">{{ student.roll_number }}</code>
+                                        </td>
+                                        <td>
+                                            <span class="student-name">{{ student.name }}</span>
+                                        </td>
+                                        <td>
+                                            <div class="stacked-cell">
+                                                <span class="cell-main-text">{{ student.email }}</span>
+                                                <span class="cell-sub-text"><i class="fa-solid fa-phone" style="font-size: 0.75rem;"></i> {{ student.phone }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="stacked-cell">
+                                                <span class="course-track-tag">{{ student.course }}</span>
+                                                <span class="cell-sub-text" style="margin-top: 0.2rem; font-weight: 500;">{{ student.semester }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="admission-date-text">{{ student.admission_date_display }}</span>
+                                        </td>
+                                        <td class="text-right actions-cell">
+                                            <!-- Edit Button -->
+                                            <a href="/edit/{{ student.id }}" class="btn-action btn-edit" title="Edit Student details">
+                                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                                            </a>
+                                            <!-- Delete Button -->
+                                            <form action="/delete/{{ student.id }}" method="POST" style="display: inline-block; margin-left: 0.3rem;">
+                                                <button type="submit" class="btn-action btn-delete" onclick="return confirm('Are you sure you want to delete this student record?');" title="Delete student record">
+                                                    <i class="fa-solid fa-trash-can"></i> Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="empty-state">
+                                            No student records found matching the criteria. Click "Fetch Mock Student" or fill the form on the right!
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right: Manual Add Form -->
+                <div class="card form-card">
+                    <div class="card-header">
+                        <h2>Enroll New Student</h2>
+                        <p class="card-subtitle">Manually add student details</p>
+                    </div>
+                    <form action="/add" method="POST" class="enroll-form">
+                        <div class="form-group">
+                            <label for="student-roll">Roll Number</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-id-card input-icon"></i>
+                                <input type="text" id="student-roll" name="roll_number" placeholder="E.g. CSE/2024/041" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user input-icon"></i>
+                                <input type="text" id="student-name" name="name" placeholder="E.g. Rajesh Kumar" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-email">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-envelope input-icon"></i>
+                                <input type="email" id="student-email" name="email" placeholder="E.g. rajesh@university.edu" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-phone">Contact Number</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-phone input-icon"></i>
+                                <input type="text" id="student-phone" name="phone" placeholder="E.g. +91 98765 43210" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-course">Course Track</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-book input-icon"></i>
+                                <select id="student-course" name="course" required>
+                                    <option value="B.Tech Computer Science">B.Tech Computer Science</option>
+                                    <option value="B.Tech Information Technology">B.Tech Information Technology</option>
+                                    <option value="B.Tech Electronics & Comm.">B.Tech Electronics & Comm.</option>
+                                    <option value="MCA (Master of Computer Applications)">MCA (Master of Computer Applications)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-semester">Semester / Year</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-days input-icon"></i>
+                                <select id="student-semester" name="semester" required>
+                                    <option value="Semester I (1st Year)">Semester I (1st Year)</option>
+                                    <option value="Semester III (2nd Year)">Semester III (2nd Year)</option>
+                                    <option value="Semester V (3rd Year)">Semester V (3rd Year)</option>
+                                    <option value="Semester VII (4th Year)">Semester VII (4th Year)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="student-date">Admission Date</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-check input-icon"></i>
+                                <input type="date" id="student-date" name="admission_date" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fa-solid fa-user-plus"></i> Enroll Student
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2026 Student Registry Portal.</p>
+        </footer>
+    </div>
+</body>
+</html>
