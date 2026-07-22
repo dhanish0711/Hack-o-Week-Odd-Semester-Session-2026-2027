@@ -14,6 +14,11 @@ ENV/
 *.db
 *.sqlite3
 
+# Data files
+*.csv
+*.xlsx
+!Batch 2024-28 (Roll List for V Sem) 30-06-26.xlsx
+
 # OS / IDE files
 .vscode/
 .idea/
