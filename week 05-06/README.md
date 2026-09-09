@@ -172,7 +172,7 @@ Multi-epoch Binary Cross-Entropy loss decay and 2D classification decision surfa
 
 1. Navigate to the project directory:
    ```bash
-   cd "week 5-6"
+   cd "week 05-06"
    ```
 2. Install required dependencies:
    ```bash

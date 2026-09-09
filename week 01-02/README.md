@@ -1,4 +1,4 @@
-# Week 1–2: Student Registry Portal
+# Week 01–02: Student Registry Portal
 
 A lightweight, server-side rendered **Student Registry Portal** built using **Flask, SQLite, HTML5, and CSS3** with **zero JavaScript**. The application handles full database CRUD (Create, Read, Update, Delete) operations, live search filtering, and fetches mock student records on-demand from a public REST API.
 
@@ -89,7 +89,7 @@ pip install flask
 ```
 
 ### 2. Launch the Application
-Run the Flask server from within the `week 1-2` directory:
+Run the Flask server from within the `week 01-02` directory:
 ```bash
 python app.py
 ```

@@ -108,7 +108,7 @@ Displays monthly sales revenue trends over time alongside top 5 revenue-generati
 
 1. Navigate to project folder:
    ```bash
-   cd "week 3-4"
+   cd "week 03-04"
    ```
 2. Install required dependencies:
    ```bash

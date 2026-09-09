@@ -7,7 +7,7 @@
 ![Seaborn](https://img.shields.io/badge/Seaborn-Statistical_Plots-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 
-An industry-grade Data Science & Machine Learning Engineering suite implemented in `week 9/` covering foundational and advanced techniques for **Handling Missing Data**, **Domain Feature Engineering**, **Feature Scaling**, and **Rigorous Model Evaluation** (Stratified Train/Test Split, $k$-Fold Cross-Validation, Confusion Matrix, Precision/Recall/$F_1$, ROC-AUC, and Financial Threshold Optimization) applied to **10,000 Credit Underwriting & Default Risk Records**.
+An industry-grade Data Science & Machine Learning Engineering suite implemented in `week 09/` covering foundational and advanced techniques for **Handling Missing Data**, **Domain Feature Engineering**, **Feature Scaling**, and **Rigorous Model Evaluation** (Stratified Train/Test Split, $k$-Fold Cross-Validation, Confusion Matrix, Precision/Recall/$F_1$, ROC-AUC, and Financial Threshold Optimization) applied to **10,000 Credit Underwriting & Default Risk Records**.
 
 ---
 
@@ -155,7 +155,7 @@ Receiver Operating Characteristic (ROC) curve ($\text{AUC} = 0.767$) alongside t
 ## 📓 Interactive Jupyter Notebook
 
 For an interactive, cell-by-cell walkthrough with rich markdown explanations and inline Seaborn/Matplotlib visualizations, open the notebook:
-👉 **[`week_9_model_evaluation_and_feature_engineering.ipynb`](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%209/week_9_model_evaluation_and_feature_engineering.ipynb)**
+👉 **[`week_09_model_evaluation_and_feature_engineering.ipynb`](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%209/week_09_model_evaluation_and_feature_engineering.ipynb)**
 
 ---
 
@@ -184,7 +184,7 @@ CHOOSE AN OPTION FOR INPUT:
 
 1. Navigate to the project directory:
    ```bash
-   cd "week 9"
+   cd "week 09"
    ```
 2. Install dependencies:
    ```bash

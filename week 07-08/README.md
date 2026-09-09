@@ -189,7 +189,7 @@ CHOOSE AN OPTION FOR INPUT:
 
 1. Navigate to the project directory:
    ```bash
-   cd "week 7-8"
+   cd "week 07-08"
    ```
 2. Install dependencies:
    ```bash

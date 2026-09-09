@@ -24,11 +24,11 @@ Welcome to the **Hack-o-Week** repository for the Odd Semester Session. This rep
 
 ```mermaid
 flowchart LR
-    W1["📅 Week 1-2<br><b>Student Registry Portal</b><br>• Server-rendered CRUD<br>• SQLite Database<br>• REST API Seed Integration"]
-    --> W3["📅 Week 3-4<br><b>E-Commerce Analytics Engine</b><br>• Python OOP & Comprehensions<br>• NumPy Array Broadcasting<br>• Pandas Multi-Table GroupBy"]
-    --> W5["📅 Week 5-6<br><b>Linear Algebra & Autograd</b><br>• Vector Norms & Dot Products<br>• Covariance & Eigendecomposition<br>• Reverse-Mode AutoDiff DAG"]
-    --> W7["📅 Week 7-8<br><b>Classical Machine Learning</b><br>• Linear, Poly, Ridge, Lasso<br>• Logistic Regression & KNN<br>• Car Valuation & Deal Advisor"]
-    --> W9["📅 Week 9<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
+    W1["📅 Week 01-02<br><b>Student Registry Portal</b><br>• Server-rendered CRUD<br>• SQLite Database<br>• REST API Seed Integration"]
+    --> W3["📅 Week 03-04<br><b>E-Commerce Analytics Engine</b><br>• Python OOP & Comprehensions<br>• NumPy Array Broadcasting<br>• Pandas Multi-Table GroupBy"]
+    --> W5["📅 Week 05-06<br><b>Linear Algebra & Autograd</b><br>• Vector Norms & Dot Products<br>• Covariance & Eigendecomposition<br>• Reverse-Mode AutoDiff DAG"]
+    --> W7["📅 Week 07-08<br><b>Classical Machine Learning</b><br>• Linear, Poly, Ridge, Lasso<br>• Logistic Regression & KNN<br>• Car Valuation & Deal Advisor"]
+    --> W9["📅 Week 09<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
     --> W10["📅 Week 10<br><b>Pipelines & Clustering</b><br>• Scikit-Learn ColumnTransformer<br>• K-Means, Hierarchical & DBSCAN<br>• Persona Profiling & CRM Playbook"]
 ```
 
@@ -36,11 +36,11 @@ flowchart LR
 
 ## 📂 Repository Index & Subfolders
 
-### 1. [week 1-2/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%201-2) — Student Registry & Database CRUD Portal
+### 1. [week 01-02/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2001-02) — Student Registry & Database CRUD Portal
 - **Description**: Server-rendered Flask web application managing academic roll lists and student profiles with zero client-side JavaScript.
 - **Key Features**: Live search filtering, dynamic admission date formatting, SQLite database persistence, and RandomUser API seed integration.
 
-### 2. [week 3-4/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%203-4) — Global E-Commerce Data Analytics & Visualization Engine
+### 2. [week 03-04/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2003-04) — Global E-Commerce Data Analytics & Visualization Engine
 - **Description**: Python data engineering pipeline analyzing 397,000+ transaction records across 4,300+ customers using real relational datasets.
 - **Key Features**:
   - **Python OOP & Comprehensions**: Modular architecture (`DataLoader`, `DataCleaner`, `SalesAnalyticsEngine`, `DataVisualizer`) with list/dict comprehensions.
@@ -48,7 +48,7 @@ flowchart LR
   - **Pandas DataFrames & GroupBy**: 3-table SQL-style inner joins and multi-level GroupBy statistical aggregations.
   - **Data Visualizations**: High-resolution Seaborn and Matplotlib exports (Heatmaps, Violin Plots, Bar Charts, Line Dashboards).
 
-### 3. [week 5-6/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%205-6) — Linear Algebra & Calculus Engine for Machine Learning
+### 3. [week 05-06/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2005-06) — Linear Algebra & Calculus Engine for Machine Learning
 - **Description**: Mathematics, linear algebra, and automatic differentiation (Autograd) system built from scratch in Python applied to the Hotel Booking Demand & Cancellation dataset (119,390 records).
 - **Key Features**:
   - **Linear Algebra**: Feature vector $L_2$ norms, dot product cosine similarity matrices, covariance matrix ($\mathbf{\Sigma} = \frac{1}{N-1}\mathbf{X}^T\mathbf{X}$), spectral eigendecomposition ($\mathbf{\Sigma}\mathbf{v} = \lambda\mathbf{v}$), power iteration, and 2D PCA projection.
@@ -56,7 +56,7 @@ flowchart LR
   - **From-Scratch Neural Network**: Multi-Layer Perceptron (MLP) trained via pure backpropagation and SGD for cancellation prediction with loss curves and decision boundary plots.
   - **Diagnostic Visualizations**: High-resolution exports (Vector similarity heatmap, Covariance scree plot, PCA projection scatter, Gradient flow validation, Decision boundary surface).
 
-### 4. [week 7-8/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%207-8) — Classical Machine Learning Suite: Regression & Classification
+### 4. [week 07-08/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2007-08) — Classical Machine Learning Suite: Regression & Classification
 - **Description**: Comprehensive machine learning suite covering classical Regression and Classification algorithms applied to the Used Car Resale Market Dataset (6,000 records).
 - **Key Features**:
   - **Regression Suite**: Linear Regression (OLS & Normal Equation), Polynomial Regression (Degree 2, capturing non-linear depreciation and bias-variance tradeoff, $R^2 = 0.9318$), Ridge Regression ($L_2$ shrinkage), and Lasso Regression ($L_1$ coordinate descent feature sparsity).
@@ -64,7 +64,7 @@ flowchart LR
   - **Real-World Decision Support**: Interactive Car Valuation & Deal Advisor evaluating specific vehicle buyer profiles and scoring deal quality.
   - **Diagnostic Visualizations**: 5 high-resolution figures (Depreciation curves, Ridge vs Lasso regularization paths, ROC/Confusion Matrix, KNN decision surface, Benchmark leaderboard).
 
-### 5. [week 9/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%209) — Advanced Model Evaluation, Feature Engineering & Scaling Suite
+### 5. [week 09/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2009) — Advanced Model Evaluation, Feature Engineering & Scaling Suite
 - **Description**: Production-grade data preprocessing, leakage-free feature engineering, scaler showdown, and comprehensive evaluation system on 10,000 financial credit underwriting records.
 - **Key Features**:
   - **Handling Missing Data**: Missingness diagnostics, median/mode imputation, and boolean missingness indicator flags ($I_{\text{missing}}$) to capture non-random omission signals.
