@@ -28,6 +28,7 @@ flowchart LR
     --> W3["📅 Week 3-4<br><b>E-Commerce Analytics Engine</b><br>• Python OOP & Comprehensions<br>• NumPy Array Broadcasting<br>• Pandas Multi-Table GroupBy"]
     --> W5["📅 Week 5-6<br><b>Linear Algebra & Autograd</b><br>• Vector Norms & Dot Products<br>• Covariance & Eigendecomposition<br>• Reverse-Mode AutoDiff DAG"]
     --> W7["📅 Week 7-8<br><b>Classical Machine Learning</b><br>• Linear, Poly, Ridge, Lasso<br>• Logistic Regression & KNN<br>• Car Valuation & Deal Advisor"]
+    --> W9["📅 Week 9<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
 ```
 
 ---
@@ -61,6 +62,16 @@ flowchart LR
   - **Classification Suite**: Logistic Regression (Binary Cross-Entropy, 79.92% accuracy, 0.835 ROC-AUC) and K-Nearest Neighbors (KNN with $k$-hyperparameter tuning).
   - **Real-World Decision Support**: Interactive Car Valuation & Deal Advisor evaluating specific vehicle buyer profiles and scoring deal quality.
   - **Diagnostic Visualizations**: 5 high-resolution figures (Depreciation curves, Ridge vs Lasso regularization paths, ROC/Confusion Matrix, KNN decision surface, Benchmark leaderboard).
+
+### 5. [week 9/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%209) — Advanced Model Evaluation, Feature Engineering & Scaling Suite
+- **Description**: Production-grade data preprocessing, leakage-free feature engineering, scaler showdown, and comprehensive evaluation system on 10,000 financial credit underwriting records.
+- **Key Features**:
+  - **Handling Missing Data**: Missingness diagnostics, median/mode imputation, and boolean missingness indicator flags ($I_{\text{missing}}$) to capture non-random omission signals.
+  - **Feature Engineering & Outliers**: Domain interaction ratios (debt-to-income, line utilization intensity), non-linear log transformations ($\log(1+x)$), and Tukey's IQR Winsorization/capping.
+  - **Feature Scaling Showdown**: Mathematical comparison of `StandardScaler` ($Z$-score), `MinMaxScaler` ($[0, 1]$), and `RobustScaler` (Median/IQR for extreme debt outliers).
+  - **Comprehensive Model Evaluation**: Stratified train/test split, Stratified $k$-Fold Cross-Validation ($k=5$), Confusion Matrix (TN=982, FP=219, FN=366, TP=434), Precision, Recall, $F_1$, $F_2$, and trapezoidal ROC-AUC (0.767).
+  - **Economic Threshold Optimization**: Portfolio net profit simulation tuning decision threshold $\tau$ from 0.50 to 0.15, saving $1,346,400.00 in charge-off loss.
+  - **Interactive CLI & Visualizations**: Interactive underwriting risk advisor CLI and 5 publication-grade diagnostic plots in `reports/`.
 
 ---
 
