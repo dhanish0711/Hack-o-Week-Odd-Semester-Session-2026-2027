@@ -29,6 +29,7 @@ flowchart LR
     --> W5["📅 Week 5-6<br><b>Linear Algebra & Autograd</b><br>• Vector Norms & Dot Products<br>• Covariance & Eigendecomposition<br>• Reverse-Mode AutoDiff DAG"]
     --> W7["📅 Week 7-8<br><b>Classical Machine Learning</b><br>• Linear, Poly, Ridge, Lasso<br>• Logistic Regression & KNN<br>• Car Valuation & Deal Advisor"]
     --> W9["📅 Week 9<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
+    --> W10["📅 Week 10<br><b>Pipelines & Clustering</b><br>• Scikit-Learn ColumnTransformer<br>• K-Means, Hierarchical & DBSCAN<br>• Persona Profiling & CRM Playbook"]
 ```
 
 ---
@@ -73,6 +74,18 @@ flowchart LR
   - **Economic Threshold Optimization**: Portfolio net profit simulation tuning decision threshold $\tau$ from 0.50 to 0.15, saving $1,346,400.00 in charge-off loss.
   - **Interactive CLI & Visualizations**: Interactive underwriting risk advisor CLI and 5 publication-grade diagnostic plots in `reports/`.
 
+### 6. [week 10/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2010) — Scikit-Learn Pipelines & Unsupervised Customer Segmentation
+- **Description**: Complete end-to-end machine learning workflow using Scikit-Learn pipelines, column transformers, and clustering algorithms (K-Means, Hierarchical, DBSCAN) applied to retail customer behavioral data (5,000 records).
+- **Key Features**:
+  - **Scikit-Learn Workflow & Pipelines**: Leak-free `ColumnTransformer` coupling median imputers with `RobustScaler` (for outlier resilience) and mode imputers with `OneHotEncoder`.
+  - **K-Means Clustering**: Partitioning with `k-means++` seeding, hyperparameter sweeps across $k \in [2, 10]$, Elbow Method (Inertia), and Silhouette curve maximization (optimal $k=5$, Silhouette = 0.3491).
+  - **Hierarchical Agglomerative Clustering**: Bottom-up variance minimization via Ward's Linkage, full dendrogram tree pruning, and cluster assignment.
+  - **DBSCAN Density Clustering**: Automated $\epsilon = 0.65$ calibration via $k$-NN knee distance heuristics ($\text{MinPts}=10$), density manifold partitioning, and isolation of 435 noise outliers (8.70%).
+  - **Mathematical Tournament Benchmark**: Quantitative ranking via Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index.
+  - **Customer Personas & Actionable CRM Strategy**: Behavioral profiling into 5 consumer personas (*VIP Whales, Careful Savers, Impulsive Trendsetters, Budget Seekers, Core Mainstream*), radar attribute footprints, and custom CRM retention playbooks.
+  - **Interactive Inference & Visuals**: Real-time CLI classifier, 5 publication-grade figures in `reports/`, and fully executed Jupyter Notebook.
+
 ---
 
 Made by [Dhanish Ladwani](https://github.com/dhanish0711/)
+
