@@ -14,10 +14,14 @@
 ## 1. Executive Summary & Theoretical Context
 
 Modern empirical datasets frequently suffer from the **Curse of Dimensionality** ($d \gg 1$):
-1. **Geometric Volume Explosion:** In high-dimensional hyperspheres, almost all volume concentrates near the outer shell, causing Euclidean pairwise distances between points to become uniformly equidistant:
-   $$\lim_{d \to \infty} \frac{\text{dist}_{\max} - \text{dist}_{\min}}{\text{dist}_{\min}} \to 0$$
-2. **Multicollinearity & Overfitting:** Collinear features inflate parameter variance and destabilize downstream estimators.
-3. **Cognitive Incomprehensibility:** Humans cannot directly visualize data beyond 3 dimensions.
+1. **Geometric Volume Explosion:** In high-dimensional hyperspheres, volume concentrates almost entirely near the outer shell, causing Euclidean pairwise distances between points to become uniformly equidistant:
+
+$$
+\lim_{d \to \infty} \frac{\text{dist}_{\max} - \text{dist}_{\min}}{\text{dist}_{\min}} = 0
+$$
+
+2. **Multicollinearity & Overfitting:** Highly correlated features inflate parameter variance and destabilize downstream estimators.
+3. **Cognitive Incomprehensibility:** Humans cannot directly visualize or intuit data topologies beyond 3 dimensions.
 
 This module provides a rigorous comparative investigation of the two preeminent paradigms in dimensionality reduction:
 - **Principal Component Analysis (PCA):** A deterministic, linear, global variance-maximizing orthogonal projection grounded in spectral eigendecomposition and Singular Value Decomposition (SVD).
@@ -70,34 +74,64 @@ flowchart TD
 ### 3.1 Principal Component Analysis (PCA)
 
 #### Step 1: Standardization ($Z$-Score Normalization)
-Because PCA maximizes variance, unscaled features with large numerical ranges (e.g. `attendance_rate` $\in [0, 100]$) would artificially dominate over features with small scales (e.g. `prior_gpa` $\in [0, 4.0]$). We standardize:
-$$z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}, \quad \forall i \in \{1,\dots,N\}, \; j \in \{1,\dots,d\}$$
+Because PCA maximizes variance, unscaled features with large numerical ranges (e.g. `attendance_rate` $\in [0, 100]$) would artificially dominate over features with small scales (e.g. `prior_gpa` $\in [0, 4.0]$). We standardize each feature:
+
+$$
+z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}, \quad \forall i \in \{1,\dots,N\}, \; j \in \{1,\dots,d\}
+$$
 
 #### Step 2: Covariance Matrix & Spectral Eigendecomposition
 The sample covariance matrix of the zero-mean standardized matrix $\mathbf{X} \in \mathbb{R}^{N \times d}$ is:
-$$\mathbf{\Sigma} = \frac{1}{N - 1} \mathbf{X}^T \mathbf{X} \in \mathbb{R}^{d \times d}$$
+
+$$
+\mathbf{\Sigma} = \frac{1}{N - 1} \mathbf{X}^T \mathbf{X} \in \mathbb{R}^{d \times d}
+$$
+
 By the Spectral Theorem for real symmetric positive semi-definite matrices, $\mathbf{\Sigma}$ admits orthogonal eigendecomposition:
-$$\mathbf{\Sigma} \mathbf{v}_k = \lambda_k \mathbf{v}_k, \quad k \in \{1, \dots, d\}$$
+
+$$
+\mathbf{\Sigma} \mathbf{v}_k = \lambda_k \mathbf{v}_k, \quad k \in \{1, \dots, d\}
+$$
+
 where $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_d \ge 0$ are the eigenvalues, and $\mathbf{v}_k$ are the orthonormal eigenvectors ($\mathbf{v}_i^T \mathbf{v}_j = \delta_{ij}$).
 
 Equivalently, computed via Singular Value Decomposition (SVD) on $\mathbf{X}$:
-$$\mathbf{X} = \mathbf{U} \mathbf{S} \mathbf{V}^T \implies \lambda_k = \frac{s_k^2}{N - 1}$$
+
+$$
+\mathbf{X} = \mathbf{U} \mathbf{S} \mathbf{V}^T \implies \lambda_k = \frac{s_k^2}{N - 1}
+$$
 
 #### Step 3: Explained Variance Ratio & Kaiser Criterion
 The proportion of total sample variance captured by component $k$ is:
-$$\text{EVR}_k = \frac{\lambda_k}{\sum_{j=1}^d \lambda_j}$$
+
+$$
+\text{EVR}_k = \frac{\lambda_k}{\sum_{j=1}^d \lambda_j}
+$$
+
 - **Kaiser Criterion:** Retain only components with eigenvalues $\lambda_k \ge 1.0$ (i.e. components accounting for more variance than an average single standardized variable).
 
 #### Step 4: Factor Loadings & Biplot Geometry
 Factor loadings represent the Pearson correlation coefficient between original standardized feature $j$ and principal component $k$:
-$$L_{jk} = v_{jk} \sqrt{\lambda_k} = \text{Corr}(X_j, Z_k)$$
+
+$$
+L_{jk} = v_{jk} \sqrt{\lambda_k} = \text{Corr}(X_j, Z_k)
+$$
+
 A 2D Biplot simultaneously displays observations as coordinates $(Z_{i1}, Z_{i2})$ alongside vectors depicting the magnitude and direction of feature loadings $(L_{j1}, L_{j2})$.
 
 #### Step 5: Lossy Compression & Inverse Reconstruction
 Given a $k$-dimensional projection $\mathbf{Z}_k = \mathbf{X} \mathbf{W}_k \in \mathbb{R}^{N \times k}$ with projection matrix $\mathbf{W}_k = [\mathbf{v}_1, \dots, \mathbf{v}_k]$, the original data can be reconstructed via:
-$$\hat{\mathbf{X}}_k = \mathbf{Z}_k \mathbf{W}_k^T = \mathbf{X} \mathbf{W}_k \mathbf{W}_k^T$$
+
+$$
+\hat{\mathbf{X}}_k = \mathbf{Z}_k \mathbf{W}_k^T = \mathbf{X} \mathbf{W}_k \mathbf{W}_k^T
+$$
+
 The reconstruction Root Mean Squared Error (RMSE) quantifies information loss:
-$$\text{RMSE}(k) = \sqrt{\frac{1}{N \cdot d} \sum_{i=1}^N \sum_{j=1}^d \left( x_{ij} - \hat{x}_{ij}^{(k)} \right)^2}$$
+
+$$
+\text{RMSE}(k) = \sqrt{\frac{1}{N \cdot d} \sum_{i=1}^N \sum_{j=1}^d \left( x_{ij} - \hat{x}_{ij}^{(k)} \right)^2}
+$$
+
 When $k = d$, $\mathbf{W}_d \mathbf{W}_d^T = \mathbf{I}_d$, yielding exact lossless recovery ($\text{RMSE} = 0$).
 
 ---
@@ -106,15 +140,29 @@ When $k = d$, $\mathbf{W}_d \mathbf{W}_d^T = \mathbf{I}_d$, yielding exact lossl
 
 #### Step 1: High-Dimensional Pairwise Gaussian Affinities
 t-SNE converts high-dimensional Euclidean distances into conditional probabilities that represent affinities between observations $\mathbf{x}_i$ and $\mathbf{x}_j$:
-$$p_{j|i} = \frac{\exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|^2}{2\sigma_i^2}\right)}{\sum_{k \ne i} \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_k\|^2}{2\sigma_i^2}\right)}, \quad p_{ii} = 0$$
-The bandwidth $\sigma_i$ is determined via binary search such that the Shannon entropy $H(P_i) = -\sum_j p_{j|i} \log_2 p_{j|i}$ matches the user-specified **Perplexity**:
-$$\text{Perp}(P_i) = 2^{H(P_i)}$$
+
+$$
+p_{j|i} = \frac{\exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|^2}{2\sigma_i^2}\right)}{\sum_{k \ne i} \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_k\|^2}{2\sigma_i^2}\right)}, \quad p_{ii} = 0
+$$
+
+The bandwidth $\sigma_i$ is determined via binary search such that the Shannon entropy matches the user-specified **Perplexity**:
+
+$$
+\text{Perp}(P_i) = 2^{H(P_i)} = 2^{-\sum_j p_{j|i} \log_2 p_{j|i}}
+$$
+
 To handle outliers robustly, symmetrized joint probabilities are computed:
-$$p_{ij} = \frac{p_{j|i} + p_{i|j}}{2N}$$
+
+$$
+p_{ij} = \frac{p_{j|i} + p_{i|j}}{2N}
+$$
 
 #### Step 2: Low-Dimensional Student-t Distribution & The Crowding Problem
 In the low-dimensional embedding space $\mathbf{y}_i \in \mathbb{R}^2$, pairwise affinities are modeled using a Student-t distribution with 1 degree of freedom (standard Cauchy distribution):
-$$q_{ij} = \frac{\left(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2\right)^{-1}}{\sum_k \sum_{l \ne k} \left(1 + \|\mathbf{y}_k - \mathbf{y}_l\|^2\right)^{-1}}, \quad q_{ii} = 0$$
+
+$$
+q_{ij} = \frac{\left(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2\right)^{-1}}{\sum_k \sum_{l \ne k} \left(1 + \|\mathbf{y}_k - \mathbf{y}_l\|^2\right)^{-1}}, \quad q_{ii} = 0
+$$
 
 > **The Crowding Problem Resolved:**  
 > In high-dimensional spaces, the available volume around a point grows exponentially ($V(r) \propto r^d$). In a 2D plane, area only grows quadratically ($A(r) \propto r^2$).  
@@ -126,12 +174,20 @@ $$q_{ij} = \frac{\left(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2\right)^{-1}}{\sum_k
 
 #### Step 3: Objective Function (Kullback-Leibler Divergence)
 The embedding coordinates $\mathbf{Y} \in \mathbb{R}^{N \times 2}$ are found by minimizing the Kullback-Leibler divergence between high-D distribution $P$ and low-D distribution $Q$:
-$$C = \text{KL}(P \parallel Q) = \sum_i \sum_{j \ne i} p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
+
+$$
+C = \text{KL}(P \parallel Q) = \sum_i \sum_{j \ne i} p_{ij} \log \frac{p_{ij}}{q_{ij}}
+$$
+
 The analytic gradient governing point motions is:
-$$\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j (p_{ij} - q_{ij}) (\mathbf{y}_i - \mathbf{y}_j) \left(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2\right)^{-1}$$
+
+$$
+\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j (p_{ij} - q_{ij}) (\mathbf{y}_i - \mathbf{y}_j) \left(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2\right)^{-1}
+$$
+
 This gradient can be interpreted as a system of physical springs where:
-- Attractive forces $(p_{ij} > q_{ij})$ pull similar points together.
-- Repulsive forces $(q_{ij} > p_{ij})$ push points apart to prevent crowding.
+- Attractive forces ($p_{ij} > q_{ij}$) pull similar points together.
+- Repulsive forces ($q_{ij} > p_{ij}$) push points apart to prevent crowding.
 
 ---
 
@@ -141,18 +197,18 @@ The dataset models $N = 1,000$ university students across 8 continuous numerical
 
 | Feature Name | Description | Typical Range | Correlation with Success |
 | :--- | :--- | :--- | :--- |
-| `study_hours_weekly` | Weekly independent study hours | 5.0 – 35.0 hrs | Positive ($+0.82$) |
-| `attendance_rate` | Lecture and lab attendance percentage | 40.0% – 100.0% | Positive ($+0.79$) |
-| `sleep_hours_daily` | Average nightly sleep hours | 4.0 – 9.5 hrs | Positive ($+0.65$) |
-| `screen_time_daily` | Recreational phone/social media/gaming screen time | 1.0 – 9.0 hrs | Negative ($-0.76$) |
+| `study_hours_weekly` | Weekly independent study hours | 5.0 – 35.0 hrs | Positive (+0.82) |
+| `attendance_rate` | Lecture and lab attendance percentage | 40.0% – 100.0% | Positive (+0.79) |
+| `sleep_hours_daily` | Average nightly sleep hours | 4.0 – 9.5 hrs | Positive (+0.65) |
+| `screen_time_daily` | Recreational phone/social media/gaming screen time | 1.0 – 9.0 hrs | Negative (-0.76) |
 | `extracurricular_hours` | Sports, club leadership, volunteer hours | 0.0 – 20.0 hrs | Moderate Non-linear |
-| `stress_level` | Self-reported academic stress index | 1.0 – 10.0 | Negative ($-0.71$) |
-| `prior_gpa` | Cumulative GPA | 1.50 – 4.00 | Positive ($+0.85$) |
-| `assignment_completion_rate` | Timely coursework completion rate | 35.0% – 100.0% | Positive ($+0.81$) |
+| `stress_level` | Self-reported academic stress index | 1.0 – 10.0 | Negative (-0.71) |
+| `prior_gpa` | Cumulative GPA | 1.50 – 4.00 | Positive (+0.85) |
+| `assignment_completion_rate` | Timely coursework completion rate | 35.0% – 100.0% | Positive (+0.81) |
 
 **Target Academic Tiers:**
-- `High Achievers` ($n=300$): Rigorous study discipline, high attendance, elevated GPA, disciplined screen time.
-- `Balanced Mainstream` ($n=450$): Moderate academic load, balanced extracurriculars and social life.
+- `High Achievers` ($n=250$): Rigorous study discipline, high attendance, elevated GPA, disciplined screen time.
+- `Balanced Mainstream` ($n=500$): Moderate academic load, balanced extracurriculars and social life.
 - `At-Risk / Distracted` ($n=250$): Low attendance, chronic sleep deprivation, elevated screen time, high stress.
 
 ---
@@ -161,15 +217,15 @@ The dataset models $N = 1,000$ university students across 8 continuous numerical
 
 Both algorithms were evaluated on the exact same standardized feature matrix under strict empirical protocols:
 
-| Benchmark Metric | PCA ($k=2$) | t-SNE ($\text{Perp}=30$) | Winner & Mathematical Insight |
+| Benchmark Metric | PCA (k = 2) | t-SNE (Perplexity = 30) | Winner & Mathematical Insight |
 | :--- | :---: | :---: | :--- |
 | **2D Silhouette Score** | `0.6459` | **`0.7349`** | **t-SNE (+13.8%)** — Non-linear repulsion pushes clusters into isolated, distinct islands. |
 | **2D 5-NN Accuracy** | **`100.00%`** | **`100.00%`** | **Tie** — Both embeddings achieve perfect cohort classification in 2D. |
 | **Trustworthiness** | `0.8907` | **`0.9876`** | **t-SNE (+10.9%)** — Nearly zero false neighbors introduced in local neighborhoods. |
-| **Global Distance Spearman $\rho$** | **`0.9503`** | `0.7189` | **PCA (+32.2%)** — PCA preserves global macroscopic Euclidean geometry faithfully. |
-| **Wall-Clock Compute Time** | **`0.1619s`** | `38.5830s` | **PCA (238x faster)** — SVD matrix decomposition vs iterative $O(N \log N)$ Barnes-Hut. |
-| **Out-of-Sample Projection** | **Instant ($\mathbf{y} = \mathbf{W}^T \mathbf{x}$)** | **Not Supported** | **PCA** — Parametric linear projection matrix enables streaming inference. |
-| **Invertibility / Reconstruction** | **Yes ($\hat{\mathbf{X}} = \mathbf{Z} \mathbf{W}^T$)** | **No** | **PCA** — Lossy inverse transformation allows signal recovery and denoising. |
+| **Global Distance Spearman Rho** | **`0.9503`** | `0.7189` | **PCA (+32.2%)** — PCA preserves global macroscopic Euclidean geometry faithfully. |
+| **Wall-Clock Compute Time** | **`0.1619s`** | `38.5830s` | **PCA (238x faster)** — SVD matrix decomposition vs iterative O(N log N) Barnes-Hut. |
+| **Out-of-Sample Projection** | **Instant (y = Wᵀ x)** | **Not Supported** | **PCA** — Parametric linear projection matrix enables streaming inference. |
+| **Invertibility / Reconstruction** | **Yes (X̂ = Z Wᵀ)** | **No** | **PCA** — Lossy inverse transformation allows signal recovery and denoising. |
 
 ---
 
@@ -189,12 +245,12 @@ Both algorithms were evaluated on the exact same standardized feature matrix und
 
 ---
 
-### 6.3 t-SNE Perplexity Exploration ($\text{Perp} \in [5, 15, 30, 50]$)
+### 6.3 t-SNE Perplexity Exploration (Perplexities 5, 15, 30, 50)
 ![t-SNE Perplexity Exploration](reports/03_tsne_perplexity_exploration.png)
-- **$\text{Perp} = 5$:** Under-smoothed local neighborhood topology; manifests localized micro-clusters and fragmented sub-islands.
-- **$\text{Perp} = 15$:** Coherent cluster structures emerge, but intra-cluster dispersion remains variable.
-- **$\text{Perp} = 30$ (Optimal):** Produces stable, well-separated cluster islands with high compactness and maximal silhouette score ($S = 0.735$).
-- **$\text{Perp} = 50$:** High perplexity enforces broader neighborhood constraints, compressing clusters closer together while retaining boundary definition.
+- **Perplexity = 5:** Under-smoothed local neighborhood topology; manifests localized micro-clusters and fragmented sub-islands.
+- **Perplexity = 15:** Coherent cluster structures emerge, but intra-cluster dispersion remains variable.
+- **Perplexity = 30 (Optimal):** Produces stable, well-separated cluster islands with high compactness and maximal silhouette score ($S = 0.735$).
+- **Perplexity = 50:** High perplexity enforces broader neighborhood constraints, compressing clusters closer together while retaining boundary definition.
 
 ---
 
@@ -286,9 +342,9 @@ jupyter notebook week_11_12_dimensionality_reduction_pca_tsne.ipynb
 | **Exploratory 2D Data Visualization** | If data is linearly separable | **Superior for complex manifolds & clusters** |
 | **Preprocessing for Machine Learning Pipelines** | **Yes (Fast, linear, preserves variance)** | No (Non-parametric, expensive) |
 | **Multicollinearity Elimination** | **Yes (Generates orthogonal, uncorrelated features)** | No (Coordinates lack orthogonal variance meaning) |
-| **Streaming / Out-of-Sample Inference** | **Yes (Instant $\mathbf{y} = \mathbf{W}^T \mathbf{x}$ matrix transform)** | No (Requires re-running optimization) |
-| **Signal Compression & Denoising** | **Yes (Invertible $\hat{\mathbf{X}} = \mathbf{Z} \mathbf{W}^T$)** | No (Strictly irreversible) |
-| **Large Datasets ($N > 100,000$)** | **Extremely fast ($O(d^3 + d^2 N)$)** | Computationally prohibitive without subsampling |
+| **Streaming / Out-of-Sample Inference** | **Yes (Instant y = Wᵀ x matrix transform)** | No (Requires re-running optimization) |
+| **Signal Compression & Denoising** | **Yes (Invertible X̂ = Z Wᵀ)** | No (Strictly irreversible) |
+| **Large Datasets (N > 100,000)** | **Extremely fast (O(d³ + d² N))** | Computationally prohibitive without subsampling |
 | **Interpretability of Axes** | **High (Each PC has explicit factor loadings)** | Zero (Dimensions 1 & 2 have no intrinsic units) |
 
 ---
