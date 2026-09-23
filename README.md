@@ -30,6 +30,7 @@ flowchart LR
     --> W7["📅 Week 07-08<br><b>Classical Machine Learning</b><br>• Linear, Poly, Ridge, Lasso<br>• Logistic Regression & KNN<br>• Car Valuation & Deal Advisor"]
     --> W9["📅 Week 09<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
     --> W10["📅 Week 10<br><b>Pipelines & Clustering</b><br>• Scikit-Learn ColumnTransformer<br>• K-Means, Hierarchical & DBSCAN<br>• Persona Profiling & CRM Playbook"]
+    --> W11["📅 Week 11-12<br><b>Dimensionality Reduction</b><br>• PCA Eigendecomposition & Biplot<br>• t-SNE Heavy-Tail Manifolds<br>• Reconstruction & Leaderboard"]
 ```
 
 ---
@@ -84,6 +85,15 @@ flowchart LR
   - **Mathematical Tournament Benchmark**: Quantitative ranking via Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index.
   - **Customer Personas & Actionable CRM Strategy**: Behavioral profiling into 5 consumer personas (*VIP Whales, Careful Savers, Impulsive Trendsetters, Budget Seekers, Core Mainstream*), radar attribute footprints, and custom CRM retention playbooks.
   - **Interactive Inference & Visuals**: Real-time CLI classifier, 5 publication-grade figures in `reports/`, and fully executed Jupyter Notebook.
+
+### 7. [week 11-12/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2011-12) — Dimensionality Reduction: PCA vs t-SNE Intuition & Practice
+- **Description**: Comprehensive mathematical investigation and quantitative benchmark comparing linear global variance maximization (PCA) versus non-linear local manifold learning (t-SNE) on the Student Lifestyle & Academic Performance Dataset (1,000 records, 8 features, 3 academic tiers).
+- **Key Features**:
+  - **Principal Component Analysis (PCA)**: Standardization, covariance matrix spectral eigendecomposition ($\mathbf{\Sigma}\mathbf{v} = \lambda\mathbf{v}$), SVD, Scree plot with Kaiser criterion ($\lambda \ge 1.0$), 2D Biplot with factor loading projection arrows, and inverse reconstruction RMSE evaluation.
+  - **t-Distributed Stochastic Neighbor Embedding (t-SNE)**: Probabilistic neighbor affinities ($p_{ij}$), heavy-tailed Student-t distribution ($q_{ij}$) resolving the Crowding Problem, KL divergence minimization, and perplexity sensitivity study ($\text{Perp} \in [5, 15, 30, 50]$).
+  - **Quantitative Tournament Leaderboard**: Rigorous head-to-head evaluation across 2D Silhouette Score, 2D 5-NN accuracy, Trustworthiness, Spearman $\rho$ global distance rank correlation, and compute latency.
+  - **Operational Tradeoffs**: Practical demonstrations of out-of-sample projection ($\mathbf{y} = \mathbf{W}^T\mathbf{x}$) and signal invertibility in PCA versus non-parametric irreversibility in t-SNE.
+  - **Interactive CLI & Visuals**: Real-time CLI projection tool (`interactive_projection.py`), 5 publication-grade 300 DPI figures in `reports/`, and fully executed Jupyter Notebook.
 
 ---
 
