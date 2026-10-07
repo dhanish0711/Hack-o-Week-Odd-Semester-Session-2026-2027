@@ -31,6 +31,7 @@ flowchart LR
     --> W9["📅 Week 09<br><b>Evaluation & Feature Engineering</b><br>• Missing Data Imputation & Indicators<br>• Standard / MinMax / Robust Scalers<br>• Stratified CV & ROC / PR / Cost Curves"]
     --> W10["📅 Week 10<br><b>Pipelines & Clustering</b><br>• Scikit-Learn ColumnTransformer<br>• K-Means, Hierarchical & DBSCAN<br>• Persona Profiling & CRM Playbook"]
     --> W11["📅 Week 11-12<br><b>Dimensionality Reduction</b><br>• PCA Eigendecomposition & Biplot<br>• t-SNE Heavy-Tail Manifolds<br>• Reconstruction & Leaderboard"]
+    --> W13["📅 Week 13-14<br><b>Ensemble Methods & Regularization</b><br>• Bagging vs Boosting (XGBoost, LightGBM)<br>• Bias-Variance Decomposition<br>• L1/L2 Shrinkage & Early Stopping"]
 ```
 
 ---
@@ -94,6 +95,15 @@ flowchart LR
   - **Quantitative Tournament Leaderboard**: Rigorous head-to-head evaluation across 2D Silhouette Score, 2D 5-NN accuracy, Trustworthiness, Spearman $\rho$ global distance rank correlation, and compute latency.
   - **Operational Tradeoffs**: Practical demonstrations of out-of-sample projection ($\mathbf{y} = \mathbf{W}^T\mathbf{x}$) and signal invertibility in PCA versus non-parametric irreversibility in t-SNE.
   - **Interactive CLI & Visuals**: Real-time CLI projection tool (`interactive_projection.py`), 5 publication-grade 300 DPI figures in `reports/`, and fully executed Jupyter Notebook.
+
+### 8. [week 13-14/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2013-14) — Ensemble Methods: Bagging, Boosting (XGBoost, LightGBM) & Regularization
+- **Description**: Comprehensive empirical investigation and mathematical formulation of ensemble learning paradigms (Bagging, Random Forest, AdaBoost, XGBoost, LightGBM), bias-variance decomposition, and regularization mechanisms applied to subscriber churn prediction (2,000 records).
+- **Key Features**:
+  - **Bias–Variance Trade-off & Decomposition**: Empirical bootstrap decomposition ($B=50$ resamples) across tree depths ($1 \to 20$) identifying high-bias underfitting, optimal generalization, and high-variance overfitting zones.
+  - **Bagging Paradigm & Variance Reduction**: Mathematical and empirical proof of ensemble variance reduction ($\text{Var}(\bar{X}) = \rho \sigma^2 + \frac{1-\rho}{B}\sigma^2$), slashing variance by 87.8% (Bagging) and 94.4% (Random Forest with $m=\sqrt{d}$ feature subsampling) without increasing bias.
+  - **Boosting Paradigms (XGBoost vs. LightGBM)**: 2nd-order Taylor series gradient approximations ($g_i, h_i$), leaf weight formulation, optimal split gain, and LightGBM histogram binning with leaf-wise growth (GOSS, EFB) achieving 1.6× faster training over XGBoost.
+  - **Regularization & Generalization Control**: Systematic sweeps of L1 (`reg_alpha`) inducing feature sparsity, L2 (`reg_lambda`) smoothing leaf weights, and 250-round early stopping simulation avoiding a +0.0444 validation loss penalty.
+  - **Interactive CLI & Visuals**: Real-time subscriber churn risk analyzer with targeted retention playbook, 5 publication-grade 300 DPI figures in `reports/`, and fully executed Jupyter Notebook.
 
 ---
 
