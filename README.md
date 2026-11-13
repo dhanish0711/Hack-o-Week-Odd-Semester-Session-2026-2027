@@ -17,6 +17,8 @@ Welcome to the **Hack-o-Week** repository for the Odd Semester Session. This rep
 ![Math](https://img.shields.io/badge/Mathematics-Calculus_&_Autograd-555555?style=for-the-badge&logo=latex&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-Structure-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-Styling-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep_Learning-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 
 ---
 
@@ -33,6 +35,7 @@ flowchart LR
     --> W11["📅 Week 11-12<br><b>Dimensionality Reduction</b><br>• PCA Eigendecomposition & Biplot<br>• t-SNE Heavy-Tail Manifolds<br>• Reconstruction & Leaderboard"]
     --> W13["📅 Week 13-14<br><b>Ensemble Methods & Regularization</b><br>• Bagging vs Boosting (XGBoost, LightGBM)<br>• Bias-Variance Decomposition<br>• L1/L2 Shrinkage & Early Stopping"]
     --> W15["📅 Week 15-16<br><b>Neural Nets & Deployment</b><br>• NumPy MLP from Scratch & Backprop<br>• Perceptron & XOR Inseparability<br>• Optimizers & Pickle/Joblib Serving"]
+    --> W17["📅 Week 17-18<br><b>Deep Learning, Vision & LLMs</b><br>• PyTorch Autograd & Modular Loops<br>• CNNs, BatchNorm, Dropout & EarlyStop<br>• Sequence (RNN/LSTM/GRU), Transformers & LLMs"]
 ```
 
 ---
@@ -117,6 +120,20 @@ flowchart LR
   - **Optimization Algorithms Showdown**: Head-to-head comparison of Vanilla SGD, Momentum ($\beta=0.9$), RMSprop ($\gamma=0.9$), and Adam (with bias-corrected first and second moments), demonstrating 95.0% test accuracy and 0.994 ROC-AUC.
   - **Production Model Deployment & Serving**: Packaging production `ModelDeploymentBundle` envelopes with preprocessing pipelines, metadata, and cryptographic SHA-256 verification. Benchmarking Pickle vs. Joblib (memory mapping, compression) and serving real-time predictions via a sub-millisecond microservice ($P_{50} = 0.190$ ms).
   - **Interactive CLI & Visuals**: Real-time clinical scoring CLI with internal hidden layer activation inspection, 5 publication-grade 300 DPI figures in `reports/`, and fully executed Jupyter Notebook.
+
+---
+
+### 10. [week 17-18/](file:///e:/Hack-o-Week-Odd-Semester-Session-2026-2027/week%2017-18) — Deep Learning with PyTorch, CNNs, Sequence Models (RNN/LSTM/GRU), Regularization, Transfer Learning, Transformers & LLM APIs
+- **Description**: Comprehensive production-grade deep learning curriculum covering PyTorch dynamic computational graphs and autograd verification, CNN image classification and feature map extraction, deep regularization (Dropout, BatchNorm, Early Stopping), sequence modeling tournament (Vanilla RNN vs. LSTM vs. GRU), transfer learning with pretrained MobileNetV2, Hugging Face Transformers tokenization and sentiment analysis, and unified multi-provider LLM API pipelines (OpenAI, Anthropic, Ollama, Mock).
+- **Key Features**:
+  - **PyTorch Core & Exact Autograd Proof**: Reverse-mode automatic differentiation DAG evaluated against closed-form analytical calculus derivatives, proving numerical exactness ($\Delta < 2.1 \times 10^{-7}$).
+  - **Convolutional Feature Extraction & Pooling**: Custom `VisualCNN` trained on 4-class synthetic visual patterns, achieving 100.0% validation accuracy and extracting layer activations across Conv1 (16 channels) and Conv2 (32 channels).
+  - **Deep Regularization Suite**: Mitigation of feature co-adaptation and internal covariate shift via Inverted Dropout ($p=0.30$) and Batch Normalization, coupled with an automated `EarlyStopping` callback saving optimal checkpoints.
+  - **Sequence Modeling Tournament**: Comparative evaluation of Vanilla RNN (1,315 params), LSTM (4,963 params), and GRU (3,747 params) on dynamic time-series classification, demonstrating how additive cell state lines prevent vanishing gradients.
+  - **Transfer Learning Acceleration**: Repurposing ImageNet-pretrained MobileNetV2 with a frozen backbone ($5,124$ trainable params) achieving 95.0% validation accuracy in Epoch 1, compared to from-scratch initialization ($2.3\text{M}$ params) requiring extensive compute.
+  - **Hugging Face Transformers Basics**: WordPiece subword tokenization, input IDs, attention masks, and sentiment classification using `distilbert-base-uncased-finetuned-sst-2-english` via PyTorch backend.
+  - **Unified Multi-Provider LLM Integration**: Multi-client manager supporting OpenAI (`gpt-4o-mini`), Anthropic (`claude-3-5-haiku`), Ollama (`llama3`), Hugging Face Hub, and an offline deterministic mock engine across Generation, Summarization, and Contextual QA.
+  - **Visuals & Execution Suite**: 5 publication-grade 300 DPI figures in `reports/`, an interactive exploration CLI, and a fully executed Jupyter Notebook.
 
 ---
 
